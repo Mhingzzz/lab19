@@ -23,10 +23,9 @@ string toUpperStr(string x){
 
 void importDataFromFile(string file, vector<string> &names, vector<int> &scores, vector<char> &grades){
     string s;
-    char n[200];
+    char n[10000];
     int a,b,c,sum;
-    fstream myfile;
-    myfile.open(file);
+    ifstream myfile(file);
 
     while(getline(myfile,s)){
         string g = s;
@@ -39,11 +38,13 @@ void importDataFromFile(string file, vector<string> &names, vector<int> &scores,
         scores.push_back(sum);
         grades.push_back(score2grade(sum));
 
-    }   
+    }
+
+    myfile.close();  
 }
 
 void getCommand(string &command, string &key){
-    cout << "Please input your command :";
+    cout << "Please input your command: ";
     cin >> command;
     if (toUpperStr(command) == "NAME" ||toUpperStr(command) == "GRADE" )
     {
@@ -62,8 +63,8 @@ void searchName(vector<string> names, vector<int> scores, vector<char> grades, s
         if (toUpperStr(key) == toUpperStr(names.at(i)))
         {
             condi = true;
-            cout << names.at(i) <<"'s " << scores.at(i) <<endl;
-            cout << names.at(i) <<"'s " << grades.at(i) <<endl;
+            cout << names.at(i) <<"'s " <<"score = "<< scores.at(i) <<endl;
+            cout << names.at(i) <<"'s " <<"grade = "<< grades.at(i) <<endl;
         }
         
     }
